@@ -1,12 +1,13 @@
-
+"use client"
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { stat } from "fs"
 
-type CartItem = {
+export type CartItem = {
     name: string,
     price: number,
     imageUrl: string,
-    quantity: number
+    quantity: number,
 }
 
 interface CartState {
@@ -24,21 +25,19 @@ const cartSlice = createSlice({
         addToCart: (state, action: PayloadAction<CartItem>) => {
             const existingItem = state.items.find(item => item.name === action.payload.name);
             if (existingItem) {
-                existingItem.quantity += action.payload.quantity;
+                existingItem.quantity += 1
             } else {
                 state.items.push(action.payload);
             }
-            console.log(state)
         },
         removeFromCart: (state, action: PayloadAction<CartItem>) => {
             const existingItem = state.items.find(item => item.name === action.payload.name);
             if (existingItem) {
-                existingItem.quantity -= action.payload.quantity;
+                existingItem.quantity -= 1;
                 if (existingItem.quantity <= 0) {
                     state.items = state.items.filter(item => item.name !== action.payload.name);
                 }
             }
-            console.log(state)
         },
 
         clearCart: (state) => {

@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/store/store";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -16,21 +18,37 @@ import Pic3 from "../../assets/Medium-7550992WJ0D1011_C.jpg";
 import LeftArrow from "../../assets/Backward-mobile.png";
 import RightArrow from "../../assets/Forward-Mobile.png";
 import PageNavBar from "@/components/PageNavBar";
+import { RootState } from "@/store/store";
+import { addToCart, CartItem } from "@/store/cartSlice";
+import { useAppDispatch } from "@/lib/hooks";
 
 type Section = {
   title: string;
   content: React.ReactNode;
 };
 
+const bagItem: CartItem = {
+  name: "Leather Handbag",
+  price: 150,
+  imageUrl: Pic1.src,
+  quantity: 1
+};
+
 const ProductPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const dispatch = useAppDispatch()
+
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     details: false,
     care: false,
     shipping: false,
-  });
+  }); 
+
+  // const addToCart = () => {
+  //   dispatch(addToCart(bagItem))
+  // }
 
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -115,10 +133,10 @@ const ProductPage: React.FC = () => {
                 nextEl: nextRef.current,
             }}
             onBeforeInit={(swiper) => {
-                if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
-                }
+              if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+              }
             }}
             className="w-full relative"
             >
@@ -170,8 +188,9 @@ const ProductPage: React.FC = () => {
 
         <button
           className="bg-black hover:bg-gray-800 text-white w-full mb-[88px] h-10 font-bold"
+          onClick={() => dispatch(addToCart(bagItem))}
         >
-            ADD TO BAG
+           ADD TO BAG
         </button>
 
         {showModal && (

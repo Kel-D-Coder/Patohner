@@ -49,7 +49,7 @@ export default function Footer() {
                 {/* Bottom Section - Copyright and Terms */}
                 <div className="flex justify-evenly items-center text-sm text-gray-500">
                     <p className="font-syne">©2025 PATH Co. - All Rights Reserved.</p>
-                    <p className="font-syne">Terms</p>
+                    <Link href="/terms" className="font-syne">Terms</Link>
                 </div>
             </div>
         </footer>
