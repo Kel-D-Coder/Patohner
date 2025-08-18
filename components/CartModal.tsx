@@ -3,17 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import bagIcon from "@/assets/Bag Black.png";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch } from "@/lib/hooks";
 import { addToCart, clearCart, removeFromCart } from "@/store/cartSlice";
 import { CartItem } from "@/store/cartSlice";
-
-// interface CartItem {
-//   id: string;
-//   name: string;
-//   image: string;
-//   price: number;
-//   quantity: number;
-// }
 
 interface CartModalProps {
   isOpen: boolean;
