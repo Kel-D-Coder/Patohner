@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="bg-white py-16 px-8">
+        <footer className="bg-white py-8 md:py-16 px-4 md:px-8">
             <div className="max-w-6xl mx-auto">
                 {/* Top Section - CONNECT and FOLLOW US stacked on the right */}
-                <div className="flex justify-evenly gap-[470px] items-start mb-20">
-                    <div></div>
-                    <div className="text-left space-y-8">
+                <div className="flex flex-col md:flex-row md:justify-evenly md:gap-[470px] items-start mb-12 md:mb-20">
+                    <div className="hidden md:block"></div>
+                    <div className="text-left space-y-6 md:space-y-8 w-full md:w-auto">
                         <div>
                             <h3 className="font-syne font-semibold text-sm mb-2">CONNECT</h3>
                             <p className="font-syne text-sm text-gray-600 mb-1">Service(at)patohner.com</p>
@@ -35,7 +35,7 @@ export default function Footer() {
                 </div>
 
                 {/* Center Section - Large PATOHNER */}
-                <div className="text-center mb-12 w-full">
+                <div className="text-center mb-8 md:mb-12 w-full">
                     <Image 
                         src={patOhnerLogo} 
                         alt="Pat Ohner Logo" 
@@ -47,7 +47,7 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Section - Copyright and Terms */}
-                <div className="flex justify-evenly items-center text-sm text-gray-500">
+                <div className="flex flex-col md:flex-row md:justify-evenly items-start md:items-center text-sm text-gray-500 space-y-2 md:space-y-0">
                     <p className="font-syne">©2025 PATH Co. - All Rights Reserved.</p>
                     <Link href="/terms" className="font-syne">Terms</Link>
                 </div>

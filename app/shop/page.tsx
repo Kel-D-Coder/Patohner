@@ -28,7 +28,7 @@ type Section = {
 };
 
 const bagItem: CartItem = {
-  name: "Leather Handbag",
+  name: "Lux denominator elly bag",
   price: 150,
   imageUrl: Pic1.src,
   quantity: 1
