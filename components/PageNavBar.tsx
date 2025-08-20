@@ -1,13 +1,13 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { HiBars3 } from "react-icons/hi2"; // Hamburger icon
 import bag from '@/assets/Bag Black.png';
 import logo from '@/assets/Pat Ohner Logo.png';
 import CartModal from './CartModal';
 import { useAppSelector } from "@/lib/hooks";
+import Menu from '@/assets/Menu.png'
+import Close from '@/assets/Close_round.png'
 
 export default function PageNavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -24,11 +24,11 @@ export default function PageNavBar() {
         {/* Left: Mobile Menu Button */}
         <div className="flex items-center md:hidden">
           <button
-            onClick={() => setIsMenuOpen(true)}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-black text-3xl"
             aria-label="Open menu"
           >
-            <HiBars3 />
+            {!isMenuOpen ? <Image src={Menu} alt="Menu" /> : <Image src={Close} alt="close"/>}
           </button>
         </div>
 
@@ -74,28 +74,20 @@ export default function PageNavBar() {
 
       <div className="border-b-2 border-black relative bottom-3"></div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-40 md:hidden">
-          <button
-            className="absolute top-4 right-4 text-black text-3xl"
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            &times;
-          </button>
-
-          <div className="flex flex-col items-center justify-center h-full space-y-10 text-black font-syne">
+        <div className="md:hidden absolute top-[40px] left-0 right-0 z-40 bg-white shadow-md border-t border-gray-200">
+          <div className="flex items-start px-6 py-4 space-x-8 font-syne">
             <Link
               href="/shop"
-              className="text-2xl font-semibold"
+              className="text-base font-semibold uppercase tracking-wide"
               onClick={() => setIsMenuOpen(false)}
             >
               SHOP
             </Link>
             <Link
               href="/about"
-              className="text-2xl font-semibold"
+              className="text-base font-semibold uppercase tracking-wide"
               onClick={() => setIsMenuOpen(false)}
             >
               ABOUT PATOHNER

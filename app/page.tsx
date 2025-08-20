@@ -1,12 +1,13 @@
 import Image from "next/image";
 import HomeNavBar from "@/components/NavBar";
-import heroImage from '@/assets/GirlPAt.jpg'
-import arrowImage from '@/assets/Arrow.png'
+import heroImage from '@/assets/GirlPAt.jpg';
+import arrowImage from '@/assets/Arrow.png';
+import mobileArrow from "@/assets/Arrow Mobile.png";
 
-import bag1 from "@/assets/image 48.png"
-import bag2 from "@/assets/image 46.png"
-import bag3 from "@/assets/image 47.png"
-import bag4 from "@/assets/image 49.png"
+import bag1 from "@/assets/image 48.png";
+import bag2 from "@/assets/image 46.png";
+import bag3 from "@/assets/image 47.png";
+import bag4 from "@/assets/image 49.png";
 import Link from "next/link";
 
 export default function Home() {
@@ -17,34 +18,27 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative">
         <div className="relative">
-          {/* Main Hero Image */}
-          <div className="relative h-screen">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative w-full h-full">
-                <Image 
-                  src={heroImage} 
-                  alt="Hero Image" 
-                  
-                  className="w-full h-[135vh]"
-                  // priority
-                />
-                {/* Film strip border effect */}
-                {/* <div className="absolute inset-0 border-8 border-black"></div> */}
-                {/* Blue perforations on left and right */}
-                {/* <div className="absolute left-0 top-0 bottom-0 w-4 bg-blue-600 opacity-60"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-4 bg-blue-600 opacity-60"></div> */}
-              </div>
-            </div>
+          <div className="relative h-[100vh]">
+            <Image 
+              src={heroImage} 
+              alt="Hero Image" 
+              className="w-full h-full object-cover md:h-[135vh]"
+              priority
+            />
             
             {/* Shop Bag Text Overlay */}
-            <div className="absolute left-36 top-[32rem] transform -translate-y-1/2 z-10">
-              <div className="flex items-center gap-2 text-black">
-                <Link href={"/shop"} className="font-syne font-medium text-lg">Shop Bag</Link>
-                <Image 
-                  src={arrowImage} 
-                  alt="Arrow"
-                  className="text-white"
-                />
+            <div 
+              className="
+                absolute 
+                left-6 top-1/2 -translate-y-1/2 
+                md:left-36 md:top-[32rem] md:-translate-y-1/2
+                z-10
+              "
+            >
+              <div className="flex items-center gap-2 text-black relative sm:top-0 sm:right-0 top-9 right-5">
+                <Link href={"/shop"} className="font-syne font-medium text-sm sm:text-lg">Shop Bag</Link>
+                <Image src={arrowImage} alt="Arrow" className="sm:block hidden" />
+                <Image src={mobileArrow} alt="Mobile Arrow" className="md:hidden" />
               </div>
             </div>
           </div>
@@ -52,44 +46,19 @@ export default function Home() {
       </section>
 
       {/* Product Display Section */}
-      <section className="py-16 mt-[180px]">
+      <section className="py-8 md:py-16 mt-8 md:mt-[180px]">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-          <div className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
-            <Image 
-              src={bag1} 
-              alt="Bag 1" 
-              width={200} 
-              height={200}
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <div className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
-            <Image 
-              src={bag2} 
-              alt="Bag 2" 
-              width={200} 
-              height={200}
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <div className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
-            <Image 
-              src={bag3} 
-              alt="Bag 3" 
-              width={200} 
-              height={200}
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <div className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
-            <Image 
-              src={bag4} 
-              alt="Bag 4" 
-              width={200} 
-              height={200}
-              className="object-cover w-full h-full"
-            />
-          </div>
+          {[bag1, bag2, bag3, bag4].map((bag, idx) => (
+            <div key={idx} className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
+              <Image 
+                src={bag} 
+                alt={`Bag ${idx + 1}`} 
+                width={200} 
+                height={200}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          ))}
         </div>
       </section>
     </div>

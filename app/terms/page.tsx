@@ -9,7 +9,7 @@ const TermsOfUse: React.FC = () => {
       {/* The main container is modified to have a smaller horizontal padding on mobile.
         The max-w-4xl and mx-auto ensure it stays centered on desktop.
       */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 bg-white text-black font-syne mb-20">
+      <div className="max-w-4xl mx-auto px-12 sm:px-6 py-12 text-black font-syne mb-20">
         {/*
           The heading has a smaller top margin on mobile,
           and the mb-24 is kept for desktop screens.
