@@ -22,7 +22,7 @@ export default function Home() {
             <Image 
               src={heroImage} 
               alt="Hero Image" 
-              className="w-full h-full object-cover md:h-[135vh]"
+              className="sm:w-full sm:h-full h-[50vh] object-cover md:h-[135vh]"
               priority
             />
             
@@ -35,10 +35,9 @@ export default function Home() {
                 z-10
               "
             >
-              <div className="flex items-center gap-2 text-black relative sm:top-0 sm:right-0 top-9 right-5">
+              <div className="flex items-center gap-2 text-black relative sm:top-0 sm:right-0  bottom-36 right-5 sm:left-0 left-1">
                 <Link href={"/shop"} className="font-syne font-medium text-sm sm:text-lg">Shop Bag</Link>
-                <Image src={arrowImage} alt="Arrow" className="sm:block hidden" />
-                <Image src={mobileArrow} alt="Mobile Arrow" className="md:hidden" />
+                <Image src={arrowImage} alt="Arrow" className="w-[3rem] sm:w-[10rem]" />
               </div>
             </div>
           </div>
@@ -46,7 +45,7 @@ export default function Home() {
       </section>
 
       {/* Product Display Section */}
-      <section className="py-8 md:py-16 mt-8 md:mt-[180px]">
+      <section className="py-8 md:py-16 md:mt-[180px] mt-[-22rem] sm:px-0 px-2.5">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
           {[bag1, bag2, bag3, bag4].map((bag, idx) => (
             <div key={idx} className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
