@@ -3,11 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-
 import bag from '@/assets/Bag White.png'
 import logo from '@/assets/Pat Ohner Logo White.png'
 import CartModal from './CartModal';
 import { useAppSelector } from "@/lib/hooks";
+import Menu from '@/assets/Menu.png'
+import Close from '@/assets/Close_round.png'
 
 export default function HomeNavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -31,7 +32,7 @@ export default function HomeNavBar() {
             onClick={() => setIsNavOpen(!isNavOpen)} 
             className="text-white text-xl font-bold"
           >
-            {isNavOpen ? '×' : '☰'}
+            {isNavOpen ? <Image src={Close} alt="close" /> : <Image src={Menu} alt="Menu" />}
           </button>
         </div>
 
@@ -51,27 +52,29 @@ export default function HomeNavBar() {
         </div>
       </nav>
 
-      {/* Mobile Navigation Links - Toggleable */}
-      {isNavOpen && (
-        <div className="md:hidden bg-white px-4 py-3 border-b border-gray-200 absolute top-[59px] left-0 right-0 z-40">
-          <div className="flex flex-col space-y-2">
-            <Link 
-              href="/shop" 
-              className="text-black font-semibold text-sm uppercase"
-              onClick={() => setIsNavOpen(false)}
-            >
-              SHOP
-            </Link>
-            <Link 
-              href="/about" 
-              className="text-black font-semibold text-sm uppercase"
-              onClick={() => setIsNavOpen(false)}
-            >
-              ABOUT PATOHNER
-            </Link>
-          </div>
-        </div>
-      )}
+{/* Mobile Navigation Links - Toggleable */}
+{isNavOpen && (
+  <div className="md:hidden absolute top-[59px] left-0 right-0 z-40 bg-white shadow-md border-t border-gray-200">
+    <div className="flex space-x-8 items-start px-6 py-4 ">
+      <Link
+        href="/shop"
+        className="text-black font-semibold text-base uppercase tracking-wide"
+        onClick={() => setIsNavOpen(false)}
+      >
+        SHOP
+      </Link>
+      <Link
+        href="/about"
+        className="text-black font-semibold text-base uppercase tracking-wide"
+        onClick={() => setIsNavOpen(false)}
+      >
+        ABOUT PATOHNER
+      </Link>
+    </div>
+  </div>
+)}
+
+      
       
       <CartModal 
         isOpen={isCartOpen}

@@ -3,17 +3,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import bagIcon from "@/assets/Bag Black.png";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch } from "@/lib/hooks";
 import { addToCart, clearCart, removeFromCart } from "@/store/cartSlice";
 import { CartItem } from "@/store/cartSlice";
-
-// interface CartItem {
-//   id: string;
-//   name: string;
-//   image: string;
-//   price: number;
-//   quantity: number;
-// }
 
 interface CartModalProps {
   isOpen: boolean;
@@ -21,11 +13,15 @@ interface CartModalProps {
   cartItems: CartItem[];
 }
 
-const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => {
+const CartModal: React.FC<CartModalProps> = ({
+  isOpen,
+  onClose,
+  cartItems,
+}) => {
   const dispatch = useAppDispatch();
   const [isCheckout, setIsCheckout] = useState(false);
   const [isDeliveryForm, setIsDeliveryForm] = useState(false);
-  
+
   if (!isOpen) return null;
 
   const total = cartItems.reduce(
@@ -63,32 +59,32 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
         onClick={handleClose}
         aria-label="Close modal"
       />
-      <div className={`relative ${isDeliveryForm ? 'w-full max-w-lg' : 'w-full max-w-sm'} h-full bg-white shadow-xl flex flex-col`}>
+      <div
+        className={`relative ${
+          isDeliveryForm ? "w-full max-w-lg" : "w-full max-w-sm"
+        } h-full bg-white shadow-xl flex flex-col`}
+      >
         {/* Header */}
-        <div className="px-6 py-4">
+        <div className="px-6 ">
           {!isCheckout ? (
-            <h2 className="text-2xl font-bold text-center relative top-5">In your bag</h2>
-          ) : !isDeliveryForm ? (
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-center flex-1">CHECK OUT YOUR ORDER</h2>
-              <button 
+            <div className="flex justify-end items-center">
+              <h2 className="text-2xl font-bold text-center flex-1 relative top-5">
+                In your bag
+              </h2>
+              <button
                 onClick={handleClose}
-                className="text-sm text-gray-600 hover:text-black"
+                className="text-black text-xs font-medium"
               >
                 Close
               </button>
             </div>
-          ) : (
-            <div className="flex items-center">
-              <button 
-                onClick={handleBackToCheckout}
-                className="text-sm text-gray-600 hover:text-black mr-4"
-              >
-                ← Back
-              </button>
-              <h2 className="text-xl font-bold text-center flex-1">CHECK OUT YOUR ORDER</h2>
+          ) : !isDeliveryForm ? (
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-center flex-1">
+                CHECK OUT YOUR ORDER
+              </h2>
             </div>
-          )}
+          ) : null}
         </div>
 
         {/* Content Area */}
@@ -114,8 +110,8 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                     className="border border-black p-4 relative bg-[#F8F8FA]"
                   >
                     {/* Close button in top right */}
-                    <button 
-                      className="absolute top-2 right-2 text-black text-lg leading-none hover:bg-gray-100 w-6 h-6 flex items-center justify-center" 
+                    <button
+                      className="absolute top-2 right-2 text-black text-lg leading-none hover:bg-gray-100 w-6 h-6 flex items-center justify-center"
                       onClick={() => dispatch(clearCart())}
                     >
                       ×
@@ -124,9 +120,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                     {/* Product name and price centered at top */}
                     <div className="text-center mb-4">
                       <h3 className="font-medium text-sm mb-1">{item.name}</h3>
-                      <p className="text-sm font-medium">
-                        ${item.price}
-                      </p>
+                      <p className="text-sm font-medium">${item.price}</p>
                     </div>
 
                     {/* Product image and quantity selector */}
@@ -140,9 +134,20 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                       />
                       <div className="flex items-center gap-2 text-xs bg-white px-3 py-1">
                         <span className="mr-1">Qty</span>
-                        <button className="px-1" onClick={() => dispatch(removeFromCart(item))}>-</button>
+                        <button
+                          className="px-1"
+                          onClick={() => dispatch(removeFromCart(item))}
+                        >
+                          -
+                        </button>
                         <span>{item.quantity}</span>
-                        <button disabled={item.quantity >= 3} className="px-1" onClick={() => dispatch(addToCart(item))}>+</button>
+                        <button
+                          disabled={item.quantity >= 3}
+                          className="px-1"
+                          onClick={() => dispatch(addToCart(item))}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -157,8 +162,13 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                 <h3 className="text-lg font-semibold mb-3">Order Summary</h3>
                 <div className="space-y-2">
                   {cartItems.map((item) => (
-                    <div key={item.name} className="flex justify-between text-sm">
-                      <span>{item.name} (x{item.quantity})</span>
+                    <div
+                      key={item.name}
+                      className="flex justify-between text-sm"
+                    >
+                      <span>
+                        {item.name} (x{item.quantity})
+                      </span>
                       <span>${(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
@@ -173,21 +183,25 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
             // Delivery Form View
             <div className="space-y-6">
               {/* Top Bar with light blue line */}
-              <div className="border-t-2 border-blue-300 pt-4">
-                <div className="flex items-center mb-6">
-                  <button 
-                    onClick={handleBackToCheckout}
-                    className="text-sm text-black hover:text-gray-600 mr-4"
-                  >
-                    ← Back
-                  </button>
-                  <h2 className="text-lg font-semibold text-center flex-1">Delivery</h2>
-                </div>
+              {/* <div className="border-t-2 border-blue-300 pt-4"> */}
+              <div className="flex items-center ">
+                <button
+                  onClick={handleBackToCheckout}
+                  className="text-sm text-black hover:text-gray-600 mr-4"
+                >
+                  ← Back
+                </button>
+                <h2 className="text-lg font-semibold text-center flex-1">
+                  Delivery
+                </h2>
               </div>
+              {/* </div> */}
 
               {/* Main Title */}
               <div className="text-center mb-8">
-                <h1 className="text-2xl font-bold uppercase">COMPLETE YOUR INFO</h1>
+                <h1 className="text-2xl font-bold uppercase">
+                  COMPLETE YOUR INFO
+                </h1>
               </div>
 
               {/* Contact Section */}
@@ -217,7 +231,13 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                     </select>
                     <div className="absolute right-4 top-4 pointer-events-none">
                       <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                        <path d="M1 1L6 6L11 1" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path
+                          d="M1 1L6 6L11 1"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -246,7 +266,13 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                     </select>
                     <div className="absolute right-4 top-4 pointer-events-none">
                       <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                        <path d="M1 1L6 6L11 1" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path
+                          d="M1 1L6 6L11 1"
+                          stroke="black"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -270,25 +296,36 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                     <input
                       type="text"
                       placeholder="City*"
-                      className="flex-1 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="w-1/3 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
                     />
-                    <div className="flex-1 relative">
+                    <div className="w-1/3 relative">
                       <select className="w-full p-4 border border-gray-300 rounded-md text-sm appearance-none bg-white focus:outline-none focus:border-black">
                         <option value="">State*</option>
                         <option value="lagos">Lagos</option>
                         <option value="abuja">Abuja</option>
                         <option value="kano">Kano</option>
                       </select>
-                      <div className="absolute right-4 top-4 pointer-events-none">
-                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                          <path d="M1 1L6 6L11 1" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg
+                          width="12"
+                          height="8"
+                          viewBox="0 0 12 8"
+                          fill="none"
+                        >
+                          <path
+                            d="M1 1L6 6L11 1"
+                            stroke="black"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
                     </div>
                     <input
                       type="text"
                       placeholder="Postcode*"
-                      className="flex-1 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="w-1/3 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
                     />
                   </div>
 
@@ -325,9 +362,9 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
 
         {/* Footer - Buttons */}
         {cartItems.length > 0 && (
-          <div className="p-4 border-t border-gray-200">
+          <div className=" border-t border-gray-200">
             {!isCheckout ? (
-              <button 
+              <button
                 onClick={handleCheckout}
                 className="w-full bg-black text-white py-2 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide"
               >
@@ -335,13 +372,13 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
               </button>
             ) : !isDeliveryForm ? (
               <div className="space-y-2">
-                <button 
+                <button
                   onClick={handleBackToCart}
                   className="w-full bg-gray-200 text-black py-3 font-medium hover:bg-gray-300 transition-colors text-sm tracking-wide"
                 >
                   BACK TO CART
                 </button>
-                <button 
+                <button
                   onClick={handleContinueAsGuest}
                   className="w-full bg-black text-white py-3 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide"
                 >
@@ -349,9 +386,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                 </button>
               </div>
             ) : (
-              <button 
-                className="w-full bg-black text-white py-4 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide rounded-md"
-              >
+              <button className="w-[100%] bg-black text-white py-2 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide">
                 CONTINUE
               </button>
             )}
