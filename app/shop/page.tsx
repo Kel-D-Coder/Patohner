@@ -5,7 +5,6 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "@/store/store";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

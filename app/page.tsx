@@ -2,7 +2,6 @@ import Image from "next/image";
 import HomeNavBar from "@/components/NavBar";
 import heroImage from '@/assets/GirlPAt.jpg';
 import arrowImage from '@/assets/Arrow.png';
-import mobileArrow from "@/assets/Arrow Mobile.png";
 
 import bag1 from "@/assets/image 48.png";
 import bag2 from "@/assets/image 46.png";
