@@ -9,11 +9,11 @@ export default function About() {
       <div className="pt-32 pb-16 px-16 ml-10">
         <div className="max-w-2xl">
           {/* Main Content */}
-          <div className="mb-24">
+          <div className="mb-5">
             <p className="text-black text-sm leading-relaxed">
               Born out of shared instincts and a tendency to make things,
             </p>
-            <p className="text-black text-sm leading-relaxed mb-6">
+            <p className="text-black text-sm leading-relaxed mb-6 mt-[-6px]">
               Pat Ohner makes pieces for women, shaped by feeling, not formula.
             </p>
             
@@ -35,7 +35,7 @@ export default function About() {
           
           {/* Contact Section */}
           <div className="mt-16">
-            <p className="text-xs text-black mb-6">
+            <p className="text-xs text-black mb-6 leading-2.5">
               For inquiries, assistance, or to request catalogue,<br />
               reach out – we&apos;re here for you.
             </p>
