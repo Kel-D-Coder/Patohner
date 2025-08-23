@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import bagIcon from "@/assets/Bag Black.png";
 import { useAppDispatch } from "@/lib/hooks";
-import { addToCart, clearCart, removeFromCart } from "@/store/cartSlice";
+import { addToCart, removeFromCart } from "@/store/cartSlice";
 import { CartItem } from "@/store/cartSlice";
 
 interface CartModalProps {
@@ -61,7 +61,7 @@ const CartModal: React.FC<CartModalProps> = ({
       />
       <div
         className={`relative ${
-          isDeliveryForm ? "w-full max-w-lg" : "w-full max-w-sm"
+          isDeliveryForm ? "w-full max-w-sm" : "w-full max-w-sm"
         } h-full bg-white shadow-xl flex flex-col`}
       >
         {/* Header */}
@@ -110,16 +110,18 @@ const CartModal: React.FC<CartModalProps> = ({
                     className="border border-black p-4 relative bg-[#F8F8FA]"
                   >
                     {/* Close button in top right */}
-                    <button
+                    {/* <button
                       className="absolute top-2 right-2 text-black text-lg leading-none hover:bg-gray-100 w-6 h-6 flex items-center justify-center"
                       onClick={() => dispatch(clearCart())}
                     >
                       ×
-                    </button>
+                    </button> */}
 
                     {/* Product name and price centered at top */}
                     <div className="text-center mb-4">
-                      <h3 className="font-medium text-sm mb-1">{item.name}</h3>
+                      <h3 className="font-medium text-sm mb-1 -mt-2">
+                        {item.name}
+                      </h3>
                       <p className="text-sm font-medium">${item.price}</p>
                     </div>
 
@@ -213,7 +215,7 @@ const CartModal: React.FC<CartModalProps> = ({
                 <input
                   type="email"
                   placeholder="Email"
-                  className="w-full p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                  className="w-full p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
                 />
               </div>
 
@@ -223,11 +225,9 @@ const CartModal: React.FC<CartModalProps> = ({
                 <div className="space-y-4">
                   {/* Country/Region */}
                   <div className="relative">
-                    <select className="w-full p-4 border border-gray-300 rounded-md text-sm appearance-none bg-white focus:outline-none focus:border-black">
+                    <select className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
                       <option value="">Country/Region*</option>
                       <option value="nigeria">Nigeria</option>
-                      <option value="ghana">Ghana</option>
-                      <option value="kenya">Kenya</option>
                     </select>
                     <div className="absolute right-4 top-4 pointer-events-none">
                       <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -247,18 +247,18 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="First Name*"
-                      className="flex-1 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                     <input
                       type="text"
                       placeholder="Last Name*"
-                      className="flex-1 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                   </div>
 
                   {/* Address */}
                   <div className="relative">
-                    <select className="w-full p-4 border border-gray-300 rounded-md text-sm appearance-none bg-white focus:outline-none focus:border-black">
+                    <select className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
                       <option value="">Address*</option>
                       <option value="home">Home</option>
                       <option value="work">Work</option>
@@ -282,12 +282,12 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="House Number"
-                      className="flex-1 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                     <input
                       type="text"
                       placeholder="Street/apartment"
-                      className="flex-1 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                   </div>
 
@@ -296,10 +296,10 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="City*"
-                      className="w-1/3 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="w-1/3 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
                     <div className="w-1/3 relative">
-                      <select className="w-full p-4 border border-gray-300 rounded-md text-sm appearance-none bg-white focus:outline-none focus:border-black">
+                      <select className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
                         <option value="">State*</option>
                         <option value="lagos">Lagos</option>
                         <option value="abuja">Abuja</option>
@@ -325,7 +325,7 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="Postcode*"
-                      className="w-1/3 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="w-1/3 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
                   </div>
 
@@ -334,12 +334,12 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="+234"
-                      className="w-24 p-4 border border-gray-300 rounded-md text-sm text-center focus:outline-none focus:border-black"
+                      className="w-24 p-4 border border-gray-300 text-sm text-center focus:outline-none focus:border-black"
                     />
                     <input
                       type="tel"
                       placeholder="Phone Number*"
-                      className="flex-1 p-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:border-black"
+                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
                   </div>
                 </div>
@@ -366,7 +366,7 @@ const CartModal: React.FC<CartModalProps> = ({
             {!isCheckout ? (
               <button
                 onClick={handleCheckout}
-                className="w-full bg-black text-white py-2 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide"
+                className="w-full bg-black text-white py-2 font-bold hover:bg-gray-800 transition-colors text-sm tracking-wide"
               >
                 CHECKOUT
               </button>
@@ -374,19 +374,19 @@ const CartModal: React.FC<CartModalProps> = ({
               <div className="space-y-2">
                 <button
                   onClick={handleBackToCart}
-                  className="w-full bg-gray-200 text-black py-3 font-medium hover:bg-gray-300 transition-colors text-sm tracking-wide"
+                  className="w-full bg-gray-200 text-black py-3 font-bold hover:bg-gray-300 transition-colors text-sm tracking-wide"
                 >
                   BACK TO CART
                 </button>
                 <button
                   onClick={handleContinueAsGuest}
-                  className="w-full bg-black text-white py-3 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide"
+                  className="w-full bg-black text-white py-3 font-bold hover:bg-gray-800 transition-colors text-sm tracking-wide"
                 >
                   CONTINUE AS A GUEST
                 </button>
               </div>
             ) : (
-              <button className="w-[100%] bg-black text-white py-2 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide">
+              <button className="w-[100%] bg-black text-white py-2 font-bold hover:bg-gray-800 transition-colors text-sm tracking-wide">
                 CONTINUE
               </button>
             )}
