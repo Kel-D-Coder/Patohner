@@ -21,7 +21,7 @@ export default function HomeNavBar() {
       <nav className="w-full text-black px-4 md:px-10 h-[59px] flex items-center justify-between absolute top-0 left-0 z-50 bg-gradient-to-b from-[#D9D9D980] to-black font-syne">
         
         {/* Left Links - Hidden on mobile, visible on desktop */}
-        <div className="hidden md:flex gap-6 text-sm font-light text-white">
+        <div className="hidden md:flex gap-6 text-sm font-light text-white relative left-10">
           <Link href="/shop" className="hover:underline font-semibold text-[13px] leading-[35px] tracking-[0%]">SHOP</Link>
           <Link href="/about" className="hover:underline font-semibold text-[13px] leading-[35px] tracking-[0%]">ABOUT PATOHNER</Link>
         </div>
@@ -39,7 +39,7 @@ export default function HomeNavBar() {
         {/* Center Logo */}
         <div className="text-lg font-semibold tracking-widest md:mr-20">
           <Link href="/">
-            <Image src={logo} alt="logo" className="w-[100px] md:w-[133px]" />
+            <Image src={logo} alt="logo" className="sm:w-[100px] w-[90px] md:w-[133px] relative sm:right-6 sm:left-0 left-3 " />
           </Link>
         </div>
 

@@ -62,7 +62,7 @@ const ProductPage: React.FC = () => {
           <p className="text-sm mb-2">Product reference:  Elbg2025</p>
           <ul className="list-disc pl-4 text-sm space-y-1">
             <li>Natural leather bag</li>
-            <li>Cooton lining</li>
+            <li>Cotton lining</li>
             <li>Made in Nigeria</li>
           </ul>
         </>

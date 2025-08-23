@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import bagIcon from "@/assets/Bag Black.png";
+import bagIcon from "@/assets/Empty bag.png";
 import { useAppDispatch } from "@/lib/hooks";
 import { addToCart, clearCart, removeFromCart } from "@/store/cartSlice";
 import { CartItem } from "@/store/cartSlice";
@@ -67,19 +67,19 @@ const CartModal: React.FC<CartModalProps> = ({
         {/* Header */}
         <div className="px-6 ">
           {!isCheckout ? (
-            <div className="flex justify-end items-center">
+            <div className="flex justify-end items-center mt-14 mb-5">
               <h2 className="text-2xl font-bold text-center flex-1 relative top-5">
                 In your bag
               </h2>
               <button
                 onClick={handleClose}
-                className="text-black text-xs font-medium"
+                className="text-black text-xs font-medium relative bottom-12"
               >
                 Close
               </button>
             </div>
           ) : !isDeliveryForm ? (
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-14 mb-5">
               <h2 className="text-xl font-bold text-center flex-1">
                 CHECK OUT YOUR ORDER
               </h2>
@@ -118,9 +118,9 @@ const CartModal: React.FC<CartModalProps> = ({
                     </button>
 
                     {/* Product name and price centered at top */}
-                    <div className="text-center mb-4">
+                    <div className="text-center mb-4 flex flex-col m-auto w-fit">
                       <h3 className="font-medium text-sm mb-1">{item.name}</h3>
-                      <p className="text-sm font-medium">${item.price}</p>
+                      <p className="text-sm font-medium self-start">${item.price}</p>
                     </div>
 
                     {/* Product image and quantity selector */}
@@ -166,14 +166,14 @@ const CartModal: React.FC<CartModalProps> = ({
                       key={item.name}
                       className="flex justify-between text-sm"
                     >
-                      <span>
+                      <span className="text-lg">
                         {item.name} (x{item.quantity})
                       </span>
                       <span>${(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
-                  <div className="pt-2 flex justify-between font-semibold border-t border-gray-200">
-                    <span>Total</span>
+                  <div className="pt-2 flex justify-between font-semibold border-gray-200">
+                    <span className="text-lg">Subtotal</span>
                     <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
@@ -366,7 +366,7 @@ const CartModal: React.FC<CartModalProps> = ({
             {!isCheckout ? (
               <button
                 onClick={handleCheckout}
-                className="w-full bg-black text-white py-2 font-medium hover:bg-gray-800 transition-colors text-sm tracking-wide"
+                className="w-full bg-black text-white py-2 hover:bg-gray-800 transition-colors text-sm tracking-wide"
               >
                 CHECKOUT
               </button>
@@ -374,7 +374,7 @@ const CartModal: React.FC<CartModalProps> = ({
               <div className="space-y-2">
                 <button
                   onClick={handleBackToCart}
-                  className="w-full bg-gray-200 text-black py-3 font-medium hover:bg-gray-300 transition-colors text-sm tracking-wide"
+                  className="w-full border text-black py-3 font-medium hover:bg-gray-300 transition-colors text-sm tracking-wide"
                 >
                   BACK TO CART
                 </button>

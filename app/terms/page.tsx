@@ -24,7 +24,7 @@ const TermsOfUse: React.FC = () => {
         <div className="space-y-6 text-xs sm:text-sm leading-relaxed">
           <p>Patohner.com</p>
 
-          <p>
+          <p className="leading-4">
             By accessing or using PatOhner.com (the “Site”), you agree to the following Terms and Conditions.
             These govern your use of the Site and any services, content, or products offered through it.
             Please read carefully.

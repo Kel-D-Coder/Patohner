@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import patOhnerLogo from '@/assets/Pat Ohner Logo.png'
+import patOhnerLogo from '@/assets/Pat Ohner Footer Logo.png'
 import Link from "next/link";
 
 export default function Footer() {
@@ -41,7 +41,7 @@ export default function Footer() {
                         alt="Pat Ohner Logo" 
                         width={400} 
                         height={100} 
-                        className="w-full h-auto object-contain max-w-xs mx-auto md:max-w-5xl"
+                        className="w-full h-auto object-contain max-w-xs mx-auto md:max-w-5xl border border-b"
                         priority
                     />
                 </div>
