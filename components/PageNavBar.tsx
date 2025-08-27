@@ -33,7 +33,7 @@ export default function PageNavBar() {
         </div>
 
         {/* Left Links (desktop only) */}
-        <div className="hidden md:flex gap-6 text-sm font-light ml-14">
+        <div className="hidden md:flex gap-6 text-sm font-light relative left-10">
           <Link
             href="/shop"
             className="hover:underline font-semibold text-[13px] leading-[35px] tracking-[0%]"
@@ -54,7 +54,7 @@ export default function PageNavBar() {
             <Image
               src={logo}
               alt="logo"
-              className="w-[100px] md:w-[133px] h-auto mx-auto"
+              className="sm:w-[100px] w-[90px] md:w-[133px] h-auto relative right-6 sm:left-0 left-1"
               priority
             />
           </Link>

@@ -1,16 +1,20 @@
-import Image from "next/image";
-import HomeNavBar from "@/components/NavBar";
-import heroImage from '@/assets/GirlPAt.jpg';
-import arrowImage from '@/assets/Arrow.png';
-import mobileArrow from "@/assets/Arrow Mobile.png";
+"use client"
 
-import bag1 from "@/assets/image 48.png";
-import bag2 from "@/assets/image 46.png";
-import bag3 from "@/assets/image 47.png";
-import bag4 from "@/assets/image 49.png";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+import HomeNavBar from "@/components/NavBar";
+import heroImage from '@/assets/Homescreen pic.jpg';
+import arrowImage from '@/assets/Arrow.png';
+
+import bag1 from "@/assets/Desktop 4 pics/Slide 1.png";
+import bag2 from "@/assets/Desktop 4 pics/Slide 2.png";
+import bag3 from "@/assets/Desktop 4 pics/Slide 3.png";
+import bag4 from "@/assets/Desktop 4 pics/Slide 4.png";
 import Link from "next/link";
 
 export default function Home() {
+  const navigate = useRouter()
   return (
     <div className="min-h-screen bg-white">
       <HomeNavBar />
@@ -18,12 +22,15 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative">
         <div className="relative">
-          <div className="relative h-[100vh]">
+          <div className="relative">
             <Image 
-              src={heroImage} 
+              // src="https://res.cloudinary.com/djyud9uky/image/upload/a_auto/v1755819780/GirlPAt_lp6uc4.jpg"
+              src={heroImage}
               alt="Hero Image" 
-              className="w-full h-full object-cover md:h-[135vh]"
+              className="sm:w-full sm:h-full h-[50vh] md:h-[135vh]"
               priority
+              // width={1920}
+              // height={1080}
             />
             
             {/* Shop Bag Text Overlay */}
@@ -35,10 +42,9 @@ export default function Home() {
                 z-10
               "
             >
-              <div className="flex items-center gap-2 text-black relative sm:top-0 sm:right-0 top-9 right-5">
+              <div className="flex items-center gap-2 text-black relative sm:top-0 sm:right-0  bottom-36 right-5 top-7 sm:left-0 left-1">
                 <Link href={"/shop"} className="font-syne font-medium text-sm sm:text-lg">Shop Bag</Link>
-                <Image src={arrowImage} alt="Arrow" className="sm:block hidden" />
-                <Image src={mobileArrow} alt="Mobile Arrow" className="md:hidden" />
+                <Image src={arrowImage} alt="Arrow" className="w-[3rem] sm:w-[10rem]" />
               </div>
             </div>
           </div>
@@ -46,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* Product Display Section */}
-      <section className="py-8 md:py-16 mt-8 md:mt-[180px]">
+      <section className="py-8 md:py-16 md:mt-[180px]  sm:px-0 px-2.5">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
           {[bag1, bag2, bag3, bag4].map((bag, idx) => (
             <div key={idx} className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
@@ -56,6 +62,7 @@ export default function Home() {
                 width={200} 
                 height={200}
                 className="object-cover w-full h-full"
+                onClick={() => navigate.push("/shop")}
               />
             </div>
           ))}
