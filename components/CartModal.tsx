@@ -159,21 +159,21 @@ const CartModal: React.FC<CartModalProps> = ({
             <div className="flex flex-col h-full">
               {/* Order Summary */}
               <div className="mb-4">
-                <h3 className="text-lg font-medium mb-3">Order Summary</h3>
+                <h3 className="text-[1rem] font-medium mb-3">Order Summary</h3>
                 <div className="space-y-2">
                   {cartItems.map((item) => (
                     <div
                       key={item.name}
-                      className="flex justify-between text-sm"
+                      className="flex justify-between"
                     >
-                      <span className="text-lg">
+                      <span className="text-[1rem]">
                         {item.name} (x{item.quantity})
                       </span>
                       <span>${(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                   <div className="pt-2 flex justify-between font-semibold border-gray-200">
-                    <span className="text-lg">Subtotal</span>
+                    <span className="text-[1rem]">Subtotal</span>
                     <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
@@ -372,7 +372,7 @@ const CartModal: React.FC<CartModalProps> = ({
               <div className="space-y-2">
                 <button
                   onClick={handleBackToCart}
-                  className="w-full border text-black py-3 font-medium hover:bg-gray-300 transition-colors text-sm tracking-wide"
+                  className="w-full border text-black py-3 font-bold hover:bg-gray-300 transition-colors text-sm tracking-wide"
                 >
                   BACK TO CART
                 </button>
