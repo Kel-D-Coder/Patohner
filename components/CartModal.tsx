@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import bagIcon from "@/assets/Empty bag.png";
 import { useAppDispatch } from "@/lib/hooks";
-import { addToCart, removeFromCart } from "@/store/cartSlice";
+import { addToCart, clearCart, removeFromCart } from "@/store/cartSlice";
 import { CartItem } from "@/store/cartSlice";
 
 interface CartModalProps {
@@ -68,7 +68,7 @@ const CartModal: React.FC<CartModalProps> = ({
         <div className="px-6 ">
           {!isCheckout ? (
             <div className="flex justify-end items-center mt-14 mb-5">
-              <h2 className="text-2xl font-bold text-center flex-1 relative top-5">
+              <h2 className="text-2xl font-bold text-center flex-1 relative top-5 ml-5">
                 In your bag
               </h2>
               <button
@@ -110,12 +110,12 @@ const CartModal: React.FC<CartModalProps> = ({
                     className="border border-black p-4 relative bg-[#F8F8FA]"
                   >
                     {/* Close button in top right */}
-                    {/* <button
+                    <button
                       className="absolute top-2 right-2 text-black text-lg leading-none hover:bg-gray-100 w-6 h-6 flex items-center justify-center"
                       onClick={() => dispatch(clearCart())}
                     >
                       ×
-                    </button> */}
+                    </button>
 
                     {/* Product name and price centered at top */}
                     <div className="text-center mb-4 flex flex-col m-auto w-fit">
