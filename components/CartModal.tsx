@@ -159,7 +159,7 @@ const CartModal: React.FC<CartModalProps> = ({
             <div className="flex flex-col h-full">
               {/* Order Summary */}
               <div className="mb-4">
-                <h3 className="text-lg font-semibold mb-3">Order Summary</h3>
+                <h3 className="text-lg font-medium mb-3">Order Summary</h3>
                 <div className="space-y-2">
                   {cartItems.map((item) => (
                     <div
@@ -187,7 +187,7 @@ const CartModal: React.FC<CartModalProps> = ({
               <div className="flex items-center ">
                 <button
                   onClick={handleBackToCheckout}
-                  className="text-sm text-black hover:text-gray-600 mr-4"
+                  className="text-sm text-black hover:text-gray-600"
                 >
                   ← Back
                 </button>
@@ -206,20 +206,20 @@ const CartModal: React.FC<CartModalProps> = ({
 
               {/* Contact Section */}
               <div className="mb-6">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="font-bold text-lg">Contact</h3>
+                <div className="flex justify-between items-start">
+                  <h3 className="font-bold text-lg mb-1">Contact</h3>
                   <span className="text-sm text-black">Required *</span>
                 </div>
                 <input
                   type="email"
                   placeholder="Email"
-                  className="w-full p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                  className="w-full px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
                 />
               </div>
 
               {/* Delivery Section */}
               <div>
-                <h3 className="font-bold text-lg mb-4">Delivery</h3>
+                <h3 className="font-bold text-lg mb-2">Delivery</h3>
                 <div className="space-y-4">
                   {/* Country/Region */}
                   <div className="relative">
@@ -256,7 +256,7 @@ const CartModal: React.FC<CartModalProps> = ({
 
                   {/* Address */}
                   <div className="relative">
-                    <select className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
+                    <select className="w-full py-2 px-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
                       <option value="">Address*</option>
                       <option value="home">Home</option>
                       <option value="work">Work</option>
