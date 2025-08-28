@@ -10,14 +10,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import Image from "next/image";
-import Pic1 from "../../assets/Medium-7550992WJ0D1011_A.jpg";
-import Pic2 from "../../assets/Medium-7550992WJ0D1011_B.jpg";
-import Pic3 from "../../assets/Medium-7550992WJ0D1011_C.jpg";
+import Pic1 from "../../assets/Product page pics/First pic.jpg";
+import Pic2 from "../../assets/Product page pics/Second pic.jpg";
+import Pic3 from "../../assets/Product page pics/Last pic.jpg";
 
 import LeftArrow from "../../assets/Backward-mobile.png";
 import RightArrow from "../../assets/Forward-Mobile.png";
 import PageNavBar from "@/components/PageNavBar";
-import { RootState } from "@/store/store";
 import { addToCart, CartItem } from "@/store/cartSlice";
 import { useAppDispatch } from "@/lib/hooks";
 

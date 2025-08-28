@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import HomeNavBar from "@/components/NavBar";
 import desktopHero from '@/assets/Desktop Home screen.jpg';
 import mobileHero from '@/assets/Home screen for mobile.jpg';
-import heroImage from '@/assets/Homescreen pic.jpg';
 import arrowImage from '@/assets/Arrow.png';
 
 import bag1 from "@/assets/Desktop 1@2x.png";
@@ -35,13 +34,13 @@ export default function Home() {
               // height={1080}
             />
             <Image 
-              // src="https://res.cloudinary.com/djyud9uky/image/upload/a_auto/v1755819780/GirlPAt_lp6uc4.jpg"
-              src={mobileHero}
+              src="https://res.cloudinary.com/djyud9uky/image/upload/a_auto/v1756422577/Home_screen_for_mobile_n1da1k.jpg"
+              // src={mobileHero}
               alt="Hero Image" 
               className="sm:w-full sm:h-full h-[50vh] md:h-[135vh] sm:hidden block"
               priority
-              // width={1920}
-              // height={1080}
+              width={1920}
+              height={1080}
             />
             
             {/* Shop Bag Text Overlay */}

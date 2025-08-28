@@ -101,6 +101,9 @@ const TermsOfUse: React.FC = () => {
             <p className="font-semibold uppercase">8. WAIVER</p>
             <p>
               Failure to enforce any part of these Terms does not constitute a waiver of that provision or any other provision.
+              Hero Photo adapted from original by Alejandro Arrias
+
+            Hero Photo used on this site is for illustrative purposes only and remain the property of their respective owners. We do not claim ownership and have made modifications for design adaptation. If you are the rights holder and have concerns, please contact us for prompt resolution.
             </p>
           </div>
 

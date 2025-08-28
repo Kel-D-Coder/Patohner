@@ -245,12 +245,12 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="First Name*"
-                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                     <input
                       type="text"
                       placeholder="Last Name*"
-                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                   </div>
 
@@ -280,12 +280,12 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="House Number"
-                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                     <input
                       type="text"
                       placeholder="Street/apartment"
-                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
                     />
                   </div>
 
@@ -294,10 +294,10 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="City*"
-                      className="w-1/3 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                      className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
                     <div className="w-1/3 relative">
-                      <select className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
+                      <select className="w-full px-4 py-2 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
                         <option value="">State*</option>
                         <option value="lagos">Lagos</option>
                         <option value="abuja">Abuja</option>
@@ -323,7 +323,7 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="Postcode*"
-                      className="w-1/3 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                      className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
                   </div>
 
@@ -332,12 +332,12 @@ const CartModal: React.FC<CartModalProps> = ({
                     <input
                       type="text"
                       placeholder="+234"
-                      className="w-24 p-4 border border-gray-300 text-sm text-center focus:outline-none focus:border-black"
+                      className="w-24 px-4 py-2 border border-gray-300 text-sm text-center focus:outline-none focus:border-black"
                     />
                     <input
                       type="tel"
                       placeholder="Phone Number*"
-                      className="flex-1 p-4 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
                   </div>
                 </div>
