@@ -41,18 +41,6 @@ const CartModal: React.FC<CartModalProps> = ({
     phone: "",
   });
 
-  const isDeliveryFormValid =
-    deliveryForm.email &&
-    deliveryForm.country &&
-    deliveryForm.firstName &&
-    deliveryForm.lastName &&
-    deliveryForm.address &&
-    deliveryForm.city &&
-    deliveryForm.state &&
-    deliveryForm.postcode &&
-    deliveryForm.phone;
-
-  console.log("Delivery Form Valid:", isDeliveryFormValid);
   if (!isOpen) return null;
 
   const total = cartItems.reduce(
@@ -630,7 +618,7 @@ const CartModal: React.FC<CartModalProps> = ({
                       ? () =>
                           makePayment({
                             email: deliveryForm.email,
-                            amount: total, // in Naira, backend will convert
+                            amount: 20000, // in Naira, backend will convert
                           })
                       : undefined
                   }
