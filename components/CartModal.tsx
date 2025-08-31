@@ -6,6 +6,9 @@ import bagIcon from "@/assets/Empty bag.png";
 import { useAppDispatch } from "@/lib/hooks";
 import { addToCart, clearCart, removeFromCart } from "@/store/cartSlice";
 import { CartItem } from "@/store/cartSlice";
+import visaLogo from "@/assets/Vector copy.png";
+import mastercardLogo from "@/assets/Colour.png";
+import paystackLogo from "@/assets/Paystack-CeruleanBlue-StackBlue-HL 2.png";
 
 interface CartModalProps {
   isOpen: boolean;
@@ -21,7 +24,34 @@ const CartModal: React.FC<CartModalProps> = ({
   const dispatch = useAppDispatch();
   const [isCheckout, setIsCheckout] = useState(false);
   const [isDeliveryForm, setIsDeliveryForm] = useState(false);
+  const [isPaymentForm, setIsPaymentForm] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "paystack" | null>(null);
+  const [deliveryForm, setDeliveryForm] = useState({
+    email: "",
+    country: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    houseNumber: "",
+    street: "",
+    city: "",
+    state: "",
+    postcode: "",
+    phone: "",
+  });
 
+  const isDeliveryFormValid =
+    deliveryForm.email &&
+    deliveryForm.country &&
+    deliveryForm.firstName &&
+    deliveryForm.lastName &&
+    deliveryForm.address &&
+    deliveryForm.city &&
+    deliveryForm.state &&
+    deliveryForm.postcode &&
+    deliveryForm.phone;
+
+  console.log("Delivery Form Valid:", isDeliveryFormValid);
   if (!isOpen) return null;
 
   const total = cartItems.reduce(
@@ -49,7 +79,12 @@ const CartModal: React.FC<CartModalProps> = ({
   const handleClose = () => {
     setIsCheckout(false);
     setIsDeliveryForm(false);
+    setIsPaymentForm(false); // Reset payment form state on close
     onClose();
+  };
+
+  const handleContinue = () => {
+    setIsPaymentForm(true);
   };
 
   return (
@@ -181,135 +216,61 @@ const CartModal: React.FC<CartModalProps> = ({
             </div>
           ) : (
             // Delivery Form View
-            <div className="space-y-6">
-              {/* Top Bar with light blue line */}
-              {/* <div className="border-t-2 border-blue-300 pt-4"> */}
-              <div className="flex items-center ">
-                <button
-                  onClick={handleBackToCheckout}
-                  className="text-sm text-black hover:text-gray-600"
-                >
-                  ← Back
-                </button>
-                <h2 className="text-lg font-semibold text-center flex-1">
-                  Delivery
-                </h2>
-              </div>
-              {/* </div> */}
-
-              {/* Main Title */}
-              <div className="text-center mb-8">
-                <h1 className="text-2xl font-bold uppercase">
-                  COMPLETE YOUR INFO
-                </h1>
-              </div>
-
-              {/* Contact Section */}
-              <div className="mb-6">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-bold text-lg mb-1">Contact</h3>
-                  <span className="text-sm text-black">Required *</span>
+            !isPaymentForm ? (
+              <div className="space-y-6">
+                {/* Top Bar with light blue line */}
+                {/* <div className="border-t-2 border-blue-300 pt-4"> */}
+                <div className="flex items-center ">
+                  <button
+                    onClick={handleBackToCheckout}
+                    className="text-sm text-black hover:text-gray-600"
+                  >
+                    ← Back
+                  </button>
+                  <h2 className="text-lg font-semibold text-center flex-1">
+                    Delivery
+                  </h2>
                 </div>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
-                />
-              </div>
+                {/* </div> */}
 
-              {/* Delivery Section */}
-              <div>
-                <h3 className="font-bold text-lg mb-2">Delivery</h3>
-                <div className="space-y-4">
-                  {/* Country/Region */}
-                  <div className="relative">
-                    <select className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
-                      <option value="">Country/Region*</option>
-                      <option value="nigeria">Nigeria</option>
-                    </select>
-                    <div className="absolute right-4 top-4 pointer-events-none">
-                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                        <path
-                          d="M1 1L6 6L11 1"
-                          stroke="black"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
+                {/* Main Title */}
+                <div className="text-center mb-8">
+                  <h1 className="text-2xl font-bold uppercase">
+                    COMPLETE YOUR INFO
+                  </h1>
+                </div>
+
+                {/* Contact Section */}
+                <div className="mb-6">
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-bold text-lg mb-1">Contact</h3>
+                    <span className="text-sm text-black">Required *</span>
                   </div>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="w-full px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                    value={deliveryForm.email}
+                    onChange={e => setDeliveryForm({ ...deliveryForm, email: e.target.value })}
+                  />
+                </div>
 
-                  {/* First Name and Last Name */}
-                  <div className="flex gap-4">
-                    <input
-                      type="text"
-                      placeholder="First Name*"
-                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Last Name*"
-                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
-                    />
-                  </div>
-
-                  {/* Address */}
-                  <div className="relative">
-                    <select className="w-full py-2 px-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
-                      <option value="">Address*</option>
-                      <option value="home">Home</option>
-                      <option value="work">Work</option>
-                      <option value="other">Other</option>
-                    </select>
-                    <div className="absolute right-4 top-4 pointer-events-none">
-                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                        <path
-                          d="M1 1L6 6L11 1"
-                          stroke="black"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* House Number and Street/Apartment */}
-                  <div className="flex gap-4">
-                    <input
-                      type="text"
-                      placeholder="House Number"
-                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Street/apartment"
-                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
-                    />
-                  </div>
-
-                  {/* City, State, and Postcode */}
-                  <div className="flex gap-4">
-                    <input
-                      type="text"
-                      placeholder="City*"
-                      className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
-                    />
-                    <div className="w-1/3 relative">
-                      <select className="w-full px-4 py-2 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black">
-                        <option value="">State*</option>
-                        <option value="lagos">Lagos</option>
-                        <option value="abuja">Abuja</option>
-                        <option value="kano">Kano</option>
+                {/* Delivery Section */}
+                <div>
+                  <h3 className="font-bold text-lg mb-2">Delivery</h3>
+                  <div className="space-y-4">
+                    {/* Country/Region */}
+                    <div className="relative">
+                      <select
+                        className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black"
+                        value={deliveryForm.country}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, country: e.target.value })}
+                      >
+                        <option value="">Country/Region*</option>
+                        <option value="nigeria">Nigeria</option>
                       </select>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <svg
-                          width="12"
-                          height="8"
-                          viewBox="0 0 12 8"
-                          fill="none"
-                        >
+                      <div className="absolute right-4 top-4 pointer-events-none">
+                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
                           <path
                             d="M1 1L6 6L11 1"
                             stroke="black"
@@ -320,47 +281,251 @@ const CartModal: React.FC<CartModalProps> = ({
                         </svg>
                       </div>
                     </div>
-                    <input
-                      type="text"
-                      placeholder="Postcode*"
-                      className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
-                    />
-                  </div>
 
-                  {/* Phone Number */}
-                  <div className="flex gap-4">
-                    <input
-                      type="text"
-                      placeholder="+234"
-                      className="w-24 px-4 py-2 border border-gray-300 text-sm text-center focus:outline-none focus:border-black"
-                    />
-                    <input
-                      type="tel"
-                      placeholder="Phone Number*"
-                      className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
-                    />
+                    {/* First Name and Last Name */}
+                    <div className="flex gap-4">
+                      <input
+                        type="text"
+                        placeholder="First Name*"
+                        className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                        value={deliveryForm.firstName}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, firstName: e.target.value })}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Last Name*"
+                        className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                        value={deliveryForm.lastName}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, lastName: e.target.value })}
+                      />
+                    </div>
+
+                    {/* Address */}
+                    <div className="relative">
+                      <select
+                        className="w-full py-2 px-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black"
+                        value={deliveryForm.address}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, address: e.target.value })}
+                      >
+                        <option value="">Address*</option>
+                        <option value="home">Home</option>
+                        <option value="work">Work</option>
+                        <option value="other">Other</option>
+                      </select>
+                      <div className="absolute right-4 top-4 pointer-events-none">
+                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                          <path
+                            d="M1 1L6 6L11 1"
+                            stroke="black"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* House Number and Street/Apartment */}
+                    <div className="flex gap-4">
+                      <input
+                        type="text"
+                        placeholder="House Number"
+                        className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                        value={deliveryForm.houseNumber}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, houseNumber: e.target.value })}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Street/apartment"
+                        className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
+                        value={deliveryForm.street}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, street: e.target.value })}
+                      />
+                    </div>
+
+                    {/* City, State, and Postcode */}
+                    <div className="flex gap-4">
+                      <input
+                        type="text"
+                        placeholder="City*"
+                        className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                        value={deliveryForm.city}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, city: e.target.value })}
+                      />
+                      <div className="w-1/3 relative">
+                        <select
+                          className="w-full px-4 py-2 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black"
+                          value={deliveryForm.state}
+                          onChange={e => setDeliveryForm({ ...deliveryForm, state: e.target.value })}
+                        >
+                          <option value="">State*</option>
+                          <option value="lagos">Lagos</option>
+                          <option value="abuja">Abuja</option>
+                          <option value="kano">Kano</option>
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <svg
+                            width="12"
+                            height="8"
+                            viewBox="0 0 12 8"
+                            fill="none"
+                          >
+                            <path
+                              d="M1 1L6 6L11 1"
+                              stroke="black"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Postcode*"
+                        className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                        value={deliveryForm.postcode}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, postcode: e.target.value })}
+                      />
+                    </div>
+
+                    {/* Phone Number */}
+                    <div className="flex gap-4">
+                      <input
+                        type="text"
+                        placeholder="+234"
+                        className="w-24 px-4 py-2 border border-gray-300 text-sm text-center focus:outline-none focus:border-black"
+                      />
+                      <input
+                        type="tel"
+                        placeholder="Phone Number*"
+                        className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                        value={deliveryForm.phone}
+                        onChange={e => setDeliveryForm({ ...deliveryForm, phone: e.target.value })}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Opt-in Checkbox */}
-              <div className="flex items-center gap-3 pt-4">
-                <input
-                  type="checkbox"
-                  id="email-offers"
-                  className="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:border-black"
-                />
-                <label htmlFor="email-offers" className="text-sm text-black">
-                  Email me with offers and promo
-                </label>
+                {/* Opt-in Checkbox */}
+                <div className="flex items-center gap-3 pt-4">
+                  <input
+                    type="checkbox"
+                    id="email-offers"
+                    className="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:border-black"
+                  />
+                  <label htmlFor="email-offers" className="text-sm text-black">
+                    Email me with offers and promo
+                  </label>
+                </div>
+
+                {/* <button
+                  className={`w-full bg-black text-white py-2 font-bold transition-colors text-sm tracking-wide mt-6 ${!isDeliveryFormValid ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-800"}`}
+                  onClick={isDeliveryFormValid ? handleContinue : undefined}
+                  disabled={!isDeliveryFormValid}
+                >
+                  CONTINUE
+                </button> */}
               </div>
-            </div>
-          )}
+            ) : (
+              // Payment Form View
+              <div className="flex flex-col items-center justify-center py-8">
+                <h1 className="text-2xl font-bold uppercase mb-8 text-center">
+                  COMPLETE YOUR INFO
+                </h1>
+                {/* Summary */}
+                <div className="w-full max-w-md mb-6">
+                  <h2 className="font-bold text-xl mb-3">Summary</h2>
+                  <div className="border border-black p-4">
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm">Subtotal</span>
+                      <span className="font-bold text-sm">₦15,000</span>
+                    </div>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm">Shipping</span>
+                      <span className="font-bold text-sm">₦5,000</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm">Total</span>
+                      <span className="font-bold text-sm">₦20,000</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Payment */}
+                <div className="w-full max-w-md mb-6">
+                  <h2 className="font-bold text-xl mb-3">Payment</h2>
+                  <div className="border border-black rounded overflow-hidden">
+                    {/* Card Option */}
+                    {/* <label className="flex items-center justify-between px-4 py-3 border-b border-gray-300 cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="payment"
+                          checked={paymentMethod === "card"}
+                          onChange={() => setPaymentMethod("card")}
+                          className="accent-black"
+                        />
+                        <span className="text-sm">Credit/debit card</span>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <Image src={visaLogo} alt="Visa" width={40} height={24} />
+                        <Image src={mastercardLogo} alt="Mastercard" width={40} height={24} />
+                      </div>
+                    </label> */}
+                    {/* Paystack Option */}
+                    <label className="flex items-center justify-between px-4 py-3 cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="payment"
+                          checked={paymentMethod === "paystack"}
+                          onChange={() => setPaymentMethod("paystack")}
+                          className="accent-black"
+                        />
+                        <span className="text-sm">Paystack</span>
+                      </div>
+                      <Image src={paystackLogo} alt="Paystack" width={80} height={24} />
+                    </label>
+                  </div>
+                  {/* Card Form - Only show if card is selected */}
+                  {paymentMethod === "card" && (
+                    <div className="border border-gray-300 rounded p-4 mt-4">
+                      <input
+                        type="text"
+                        placeholder="Card Name*"
+                        className="w-full px-4 py-2 border border-gray-300 text-sm mb-2"
+                      />
+                      <input
+                        type="text"
+                        placeholder="2345 2345 5678 6789"
+                        className="w-full px-4 py-2 border border-gray-300 text-sm mb-2"
+                      />
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="(MM/YY)"
+                          className="w-1/2 px-4 py-2 border border-gray-300 text-sm mb-2"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Security code* (CVV)"
+                          className="w-1/2 px-4 py-2 border border-gray-300 text-sm mb-2"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {/* Info Text */}
+                <p className="text-center text-xs text-black mb-8">
+                  Clicking &quot;Complete order&quot; will redirect you to Paystack to complete your order.
+                </p>
+              </div>
+            ))}
         </div>
 
         {/* Footer - Buttons */}
         {cartItems.length > 0 && (
-          <div className=" border-t border-gray-200">
+          <div className="border-t border-gray-200">
             {!isCheckout ? (
               <button
                 onClick={handleCheckout}
@@ -383,9 +548,20 @@ const CartModal: React.FC<CartModalProps> = ({
                   CONTINUE AS A GUEST
                 </button>
               </div>
-            ) : (
-              <button className="w-[100%] bg-black text-white py-2 font-bold hover:bg-gray-800 transition-colors text-sm tracking-wide">
+            ) : !isPaymentForm ? (
+                  <button
+                    onClick={handleContinue}
+                className={`w-full bg-black text-white py-2 font-bold transition-colors text-sm tracking-wide mt-6 `}
+              >
                 CONTINUE
+              </button>
+            ) : (
+              <button
+                className={`w-full bg-black text-white py-2 font-bold transition-colors text-sm tracking-wide mt-6 ${!paymentMethod ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-800"}`}
+                onClick={paymentMethod ? () => {/* handle payment logic here */} : undefined}
+                disabled={!paymentMethod}
+              >
+                COMPLETE
               </button>
             )}
           </div>
