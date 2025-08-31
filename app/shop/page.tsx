@@ -27,7 +27,7 @@ type Section = {
 
 const bagItem: CartItem = {
   name: "Lux denominator elly bag",
-  price: 150,
+  price: 15000,
   imageUrl: Pic1.src,
   quantity: 1,
 };
@@ -211,7 +211,7 @@ const ProductPage: React.FC = () => {
             <h1 className="text-2xl font-bold mb-2">
               Lux denominator elly bag
             </h1>
-            <h1 className="text-xl font-bold mb-2 mt-[-9px]">N52,000</h1>
+            <h1 className="text-xl font-bold mb-2 mt-[-9px]">₦15,000</h1>
             <p className="text-sm mb-6">
               Elly — leather, chain, and quiet audacity.
             </p>

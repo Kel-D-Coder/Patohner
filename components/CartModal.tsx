@@ -155,7 +155,7 @@ const CartModal: React.FC<CartModalProps> = ({
                     {/* Product name and price centered at top */}
                     <div className="text-center mb-4 flex flex-col m-auto w-fit">
                       <h3 className="font-medium text-sm mb-1">{item.name}</h3>
-                      <p className="text-sm font-medium self-start">${item.price}</p>
+                      <p className="text-sm font-medium self-start">₦{item.price}</p>
                     </div>
 
                     {/* Product image and quantity selector */}
@@ -204,12 +204,12 @@ const CartModal: React.FC<CartModalProps> = ({
                       <span className="text-[1rem]">
                         {item.name} (x{item.quantity})
                       </span>
-                      <span>${(item.price * item.quantity).toFixed(2)}</span>
+                      <span>₦{(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                   <div className="pt-2 flex justify-between font-semibold border-gray-200">
                     <span className="text-[1rem]">Subtotal</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>₦{total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
@@ -439,7 +439,7 @@ const CartModal: React.FC<CartModalProps> = ({
                   <div className="border border-black p-4">
                     <div className="flex justify-between mb-2">
                       <span className="text-sm">Subtotal</span>
-                      <span className="font-bold text-sm">₦15,000</span>
+                      <span className="font-bold text-sm">₦{'15,000'}</span>
                     </div>
                     <div className="flex justify-between mb-2">
                       <span className="text-sm">Shipping</span>
