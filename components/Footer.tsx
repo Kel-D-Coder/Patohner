@@ -19,7 +19,7 @@ export default function Footer() {
                 Service(at)patohner.com
               </p>
               <p className="font-syne text-sm text-gray-600">
-                +234 090 330 6336
+                +234 8143077490
               </p>
             </div>
 
