@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import bagIcon from "@/assets/Empty bag.png";
 import { useAppDispatch } from "@/lib/hooks";
@@ -7,12 +7,15 @@ import { addToCart, clearCart, removeFromCart } from "@/store/cartSlice";
 import { CartItem } from "@/store/cartSlice";
 import paystackLogo from "@/assets/Paystack-CeruleanBlue-StackBlue-HL 2.png";
 import { usePaystackApi } from "@/hooks/usePayment";
+import emailjs from "@emailjs/browser"
 
 interface CartModalProps {
   isOpen: boolean;
   onClose: () => void;
   cartItems: CartItem[];
 }
+
+
 
 const CartModal: React.FC<CartModalProps> = ({
   isOpen,
@@ -26,7 +29,8 @@ const CartModal: React.FC<CartModalProps> = ({
   const [isPaymentForm, setIsPaymentForm] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
     "card" | "paystack" | null
-  >(null);
+    >(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [deliveryForm, setDeliveryForm] = useState({
     email: "",
     country: "",
@@ -73,7 +77,34 @@ const CartModal: React.FC<CartModalProps> = ({
   };
 
   const handleContinue = () => {
+    sendEmail();
     setIsPaymentForm(true);
+  };
+
+  const sendEmail = () => {
+    if (!formRef.current) return;
+
+    emailjs
+      .sendForm(
+        "service_fhjdast",
+        "template_7j9swyd",
+        formRef.current,
+        "ZZ5lIC36teQlPiL5w"
+      )
+      .then(
+        (result) => {
+          console.log("Email sent:", result.text);
+          setIsPaymentForm(true);
+        },
+        (error) => {
+          console.error("Email error:", error.text);
+        }
+      );
+  };
+
+  const handlePaystackSuccess = () => {
+    sendEmail();
+    // Optionally clear cart, show confirmation, etc.
   };
 
   return (
@@ -202,7 +233,14 @@ const CartModal: React.FC<CartModalProps> = ({
             </div>
           ) : // Delivery Form View
           !isPaymentForm ? (
-            <div className="space-y-6">
+            <form
+              ref={formRef}
+              className="space-y-6"
+              onSubmit={e => {
+                e.preventDefault();
+                if (isDeliveryForm) handleContinue();
+              }}
+            >
               {/* Top Bar with light blue line */}
               {/* <div className="border-t-2 border-blue-300 pt-4"> */}
               <div className="flex items-center ">
@@ -232,6 +270,8 @@ const CartModal: React.FC<CartModalProps> = ({
                   <span className="text-sm text-black">Required *</span>
                 </div>
                 <input
+                  id='email'
+                  name="email"
                   type="email"
                   placeholder="Email"
                   className="w-full px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
@@ -249,6 +289,8 @@ const CartModal: React.FC<CartModalProps> = ({
                   {/* Country/Region */}
                   <div className="relative">
                     <select
+                      id="country"
+                      name="country"
                       className="w-full p-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black"
                       value={deliveryForm.country}
                       onChange={(e) =>
@@ -277,6 +319,8 @@ const CartModal: React.FC<CartModalProps> = ({
                   {/* First Name and Last Name */}
                   <div className="flex gap-4">
                     <input
+                      id="firstName"
+                      name="firstName"
                       type="text"
                       placeholder="First Name*"
                       className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
@@ -289,6 +333,8 @@ const CartModal: React.FC<CartModalProps> = ({
                       }
                     />
                     <input
+                      id="lastName"
+                      name="lastName"
                       type="text"
                       placeholder="Last Name*"
                       className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
@@ -305,6 +351,8 @@ const CartModal: React.FC<CartModalProps> = ({
                   {/* Address */}
                   <div className="relative">
                     <select
+                      id="address"
+                      name="address"
                       className="w-full py-2 px-4 border border-gray-300 text-sm appearance-none bg-white focus:outline-none focus:border-black"
                       value={deliveryForm.address}
                       onChange={(e) =>
@@ -335,6 +383,8 @@ const CartModal: React.FC<CartModalProps> = ({
                   {/* House Number and Street/Apartment */}
                   <div className="flex gap-4">
                     <input
+                      id="houseNumber"
+                      name="houseNumber"
                       type="text"
                       placeholder="House Number"
                       className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
@@ -347,6 +397,8 @@ const CartModal: React.FC<CartModalProps> = ({
                       }
                     />
                     <input
+                      id="street"
+                      name="street"
                       type="text"
                       placeholder="Street/apartment"
                       className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black w-14"
@@ -363,6 +415,8 @@ const CartModal: React.FC<CartModalProps> = ({
                   {/* City, State, and Postcode */}
                   <div className="flex gap-4">
                     <input
+                      id="city"
+                      name="city"
                       type="text"
                       placeholder="City*"
                       className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
@@ -408,6 +462,8 @@ const CartModal: React.FC<CartModalProps> = ({
                       </div>
                     </div>
                     <input
+                      id="postcode"
+                      name="postcode"
                       type="text"
                       placeholder="Postcode*"
                       className="w-1/3 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
@@ -431,6 +487,8 @@ const CartModal: React.FC<CartModalProps> = ({
                       className="w-24 px-4 py-2 border border-gray-300 text-sm text-center focus:outline-none focus:border-black"
                     />
                     <input
+                      id="phone"
+                      name="phone"
                       type="tel"
                       placeholder="Phone Number*"
                       className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
@@ -458,14 +516,16 @@ const CartModal: React.FC<CartModalProps> = ({
                 </label>
               </div>
 
-              {/* <button
-                  className={`w-full bg-black text-white py-2 font-bold transition-colors text-sm tracking-wide mt-6 ${!isDeliveryFormValid ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-800"}`}
-                  onClick={isDeliveryFormValid ? handleContinue : undefined}
-                  disabled={!isDeliveryFormValid}
-                >
-                  CONTINUE
-                </button> */}
-            </div>
+              <button
+                type="submit"
+                disabled={!isDeliveryForm}
+                className={`w-full bg-black text-white py-2 font-bold transition-colors text-sm tracking-wide mt-6 ${
+                  !isDeliveryForm ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-800"
+                }`}
+              >
+                CONTINUE
+              </button>
+            </form>
           ) : (
             // Payment Form View
             <div className="flex flex-col items-center justify-center py-8">
@@ -593,20 +653,13 @@ const CartModal: React.FC<CartModalProps> = ({
                   CONTINUE AS A GUEST
                 </button>
               </div>
-            ) : !isPaymentForm ? (
-              <button
-                onClick={handleContinue}
-                className={`w-full bg-black text-white py-2 font-bold transition-colors text-sm tracking-wide mt-6 `}
-              >
-                CONTINUE
-              </button>
-            ) : (
+            ) : !isPaymentForm ? null : (
               <>
-              {error && (
-                <p className="text-red-500 text-center text-sm mt-2 transition-opacity duration-200">
-                  {error}
-                </p>
-              )}
+                {error && (
+                  <p className="text-red-500 text-center text-sm mt-2 transition-opacity duration-200">
+                    {error}
+                  </p>
+                )}
                 <button
                   className={`w-full bg-black text-white py-2 font-bold transition-colors text-sm tracking-wide mt-6 ${
                     !paymentMethod
@@ -615,11 +668,13 @@ const CartModal: React.FC<CartModalProps> = ({
                   }`}
                   onClick={
                     paymentMethod === "paystack"
-                      ? () =>
-                          makePayment({
+                      ? async () => {
+                          await makePayment({
                             email: deliveryForm.email,
-                            amount: 20000, // in Naira, backend will convert
-                          })
+                            amount: 20000,
+                          });
+                          handlePaystackSuccess(); // Call after payment is confirmed
+                        }
                       : undefined
                   }
                   disabled={!paymentMethod || loading}

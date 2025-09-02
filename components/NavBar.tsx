@@ -7,8 +7,8 @@ import bag from '@/assets/Bag White.png'
 import logo from '@/assets/Pat Ohner Logo White.png'
 import CartModal from './CartModal';
 import { useAppSelector } from "@/lib/hooks";
-import Menu from '@/assets/Menu.png'
-import Close from '@/assets/Close_round.png'
+import whiteMenu from "@/assets/Menu Icon White.png"
+import closeWhite from "@/assets/Close button white.png"
 
 export default function HomeNavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function HomeNavBar() {
 
   return (
     <>
-      <nav className="w-full text-black px-4 md:px-10 h-[59px] flex items-center justify-between absolute top-0 left-0 z-50 bg-gradient-to-b from-[#D9D9D980] to-black font-syne">
+      <nav className="w-full text-black px-4 md:px-10 h-[59px] flex items-center justify-between absolute top-0 left-0 z-50 bg-gradient-to-b from-[rgba(217,217,217,0.5)] to-black font-syne">
         
         {/* Left Links - Hidden on mobile, visible on desktop */}
         <div className="hidden md:flex gap-6 text-sm font-light text-white relative left-10">
@@ -32,7 +32,7 @@ export default function HomeNavBar() {
             onClick={() => setIsNavOpen(!isNavOpen)} 
             className="text-white text-xl font-bold"
           >
-            {isNavOpen ? <Image src={Close} alt="close" /> : <Image src={Menu} alt="Menu" />}
+            {isNavOpen ? <Image src={closeWhite} alt="close" /> : <Image src={whiteMenu} alt="Menu" />}
           </button>
         </div>
 
