@@ -8,6 +8,11 @@ import desktopHero from '@/assets/Desktop Home screen.jpg';
 import mobileHero from '@/assets/Home screen for mobile.jpg';
 import arrowImage from '@/assets/Arrow.png';
 
+import mobileTopLeft from "@/assets/Moble Slide 1(Top  left).png";
+import mobileTopRight from "@/assets/Moble Slide 2(Top right).png";
+import mobileBottomLeft from "@/assets/Moble Slide 3(Bottom left).png";
+import mobileBottomRight from "@/assets/Moble Slide 4(Bottom right).png";
+
 import bag1 from "@/assets/Desktop 1@2x.png";
 import bag2 from "@/assets/Desktop 2@2x.png";
 import bag3 from "@/assets/Desktop 3@2x.png";
@@ -62,8 +67,9 @@ export default function Home() {
       </section>
 
       {/* Product Display Section */}
-      <section className="py-8 md:py-16 md:mt-[-50px]  sm:px-0 px-2.5">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 w-full">
+      <section className="py-8 md:py-16 md:mt-[-50px] sm:px-0 px-2.5 sm:block hidden">
+        {/* Desktop grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 w-full sm:block md:grid">
           {[bag1, bag2, bag3, bag4].map((bag, idx) => (
             <div key={idx} className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
               <Image 
@@ -78,6 +84,23 @@ export default function Home() {
           ))}
         </div>
       </section>
+        {/* Mobile grid */}
+      <div className="sm:hidden block mt-5 px-3">
+        <div className="grid grid-cols-2 gap-2">
+          {[mobileTopLeft, mobileTopRight, mobileBottomLeft, mobileBottomRight].map((img, idx) => (
+            <div key={idx} className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
+              <Image 
+                src={img} 
+                alt={`Mobile Slide ${idx + 1}`} 
+                width={200} 
+                height={200}
+                className="object-cover w-full h-full"
+                onClick={() => navigate.push("/shop")}
+              />
+            </div>
+          ))}
+        </div>
+        </div>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function HomeNavBar() {
 
   return (
     <>
-      <nav className="w-full text-black px-4 md:px-10 h-[59px] flex items-center justify-between absolute top-0 left-0 z-50 bg-gradient-to-b from-[rgba(217,217,217,0.5)] to-black font-syne">
+      <nav className="w-full text-black px-4 md:px-10 h-[59px] flex items-center justify-between absolute top-0 left-0 z-50  font-syne ">
         
         {/* Left Links - Hidden on mobile, visible on desktop */}
         <div className="hidden md:flex gap-6 text-sm font-light text-white relative left-10">
@@ -32,7 +32,15 @@ export default function HomeNavBar() {
             onClick={() => setIsNavOpen(!isNavOpen)} 
             className="text-white text-xl font-bold"
           >
-            {isNavOpen ? <Image src={closeWhite} alt="close" /> : <Image src={whiteMenu} alt="Menu" />}
+            {isNavOpen ? (
+              <span className="inline-flex items-center justify-center rounded-full  shadow-lg p-2">
+                <Image src={closeWhite} alt="close" />
+              </span>
+            ) : (
+              <span className="inline-flex items-center justify-center rounded-full shadow-lg p-2">
+                <Image src={whiteMenu} alt="Menu" />
+              </span>
+            )}
           </button>
         </div>
 
