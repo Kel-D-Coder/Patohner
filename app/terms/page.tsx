@@ -101,7 +101,7 @@ const TermsOfUse: React.FC = () => {
             <p className="font-semibold uppercase">8. WAIVER</p>
             <p>
               Failure to enforce any part of these Terms does not constitute a waiver of that provision or any other provision.
-              Hero Photo adapted from original by Alejandro Arrias
+              Hero Photo adapted from original by Alejandro Arrias.<br/>
 
             Hero Photo used on this site is for illustrative purposes only and remain the property of their respective owners. We do not claim ownership and have made modifications for design adaptation. If you are the rights holder and have concerns, please contact us for prompt resolution.
             </p>
@@ -178,7 +178,7 @@ const TermsOfUse: React.FC = () => {
           <div>
             <p className="font-semibold uppercase">8. Disclaimer of Warranty</p>
             <p>
-              Products are provided “as is,” without any warranties, express or implied, including but not limited to merchantability, fitness for a particular purpose, and non-infringement.
+              Products are provided “as is,” without any warranties, express or implied, including but not limited to merchantability, fitness for a particular purpose, and non-infringement. 
             </p>
           </div>
 

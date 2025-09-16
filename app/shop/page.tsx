@@ -220,7 +220,7 @@ const ProductPage: React.FC = () => {
               className="bg-black hover:bg-gray-800 text-white w-full mb-[88px] h-10 font-bold"
               onClick={() => dispatch(addToCart(bagItem))}
             >
-              ADD TO BAG
+              PREORDER BAG
             </button>
 
             {showModal && (
